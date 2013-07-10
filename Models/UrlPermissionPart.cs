@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Orchard.ContentManagement;
@@ -9,6 +10,7 @@ namespace Lombiq.RoutePermissions.Models
 {
     public class UrlPermissionPart : ContentPart<UrlPermissionPartRecord>
     {
+        [Required]
         public string UrlPattern
         {
             get { return Record.UrlPattern; }
