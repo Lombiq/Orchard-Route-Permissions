@@ -1,0 +1,17 @@
+﻿@model Lombiq.RoutePermissions.Models.UrlPermissionPart
+
+<fieldset>
+    <legend>@T("Url permissions")</legend>
+    <ol>
+        <li>
+            @Html.LabelFor(m => m.UrlPattern, T("Url pattern"))
+            @Html.TextBoxFor(m => m.UrlPattern, new { @class = "text large" })
+            <span class="hint">@T("Enter a pattern as a regular expression. On urls (path and query part of the full url, including leading trailing slash and trailing slash, if any) matching this expressions the permissions set up here will be enforced. Examples: ^/blog will prevent access to anything under /blog (e.g. /blog, /blog/my-post) but ^/blog$ just to the page under /blog itself.")</span>
+        </li>
+        <li>
+            @Html.LabelFor(m => m.Priority, T("Priority"))
+            @Html.TextBoxFor(m => m.Priority, new { @class = "text small" })
+            <span class="hint">@T("Numerical priority of the permission. Patterns will be matched in the order of priority (patterns with the higher priority - larger number - will get matched first).")</span>
+        </li>
+    </ol>
+</fieldset>
