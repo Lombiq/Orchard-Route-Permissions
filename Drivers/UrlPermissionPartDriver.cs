@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using Lombiq.RoutePermissions.Models;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
 using Orchard.ContentManagement.Handlers;
+using Orchard.Localization;
 
 namespace Lombiq.RoutePermissions.Drivers
 {
@@ -14,6 +16,14 @@ namespace Lombiq.RoutePermissions.Drivers
         protected override string Prefix
         {
             get { return "Lombiq.RoutePermissions.UrlPermissionPart"; }
+        }
+
+        public Localizer T { get; set; }
+
+
+        public UrlPermissionPartDriver()
+        {
+            T = NullLocalizer.Instance;
         }
 
 
@@ -29,6 +39,14 @@ namespace Lombiq.RoutePermissions.Drivers
         protected override DriverResult Editor(UrlPermissionPart part, IUpdateModel updater, dynamic shapeHelper)
         {
             updater.TryUpdateModel(part, Prefix, null, null);
+            try
+            {
+                Regex.IsMatch("test", part.UrlPattern);
+            }
+            catch (ArgumentException ex)
+            {
+                updater.AddModelError("UrlPatternRegexMalformed", T("There was a problem with the regex you provided: {0}", ex.Message));
+            }
             return Editor(part, shapeHelper);
         }
 

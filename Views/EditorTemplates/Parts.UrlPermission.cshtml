@@ -6,7 +6,7 @@
         <li>
             @Html.LabelFor(m => m.UrlPattern, T("Url pattern"))
             @Html.TextBoxFor(m => m.UrlPattern, new { @class = "text large" })
-            <span class="hint">@T("Enter a pattern as a regular expression. On urls (path and query part of the full url, including leading trailing slash and trailing slash, if any) matching this expressions the permissions set up here will be enforced. Examples: ^/blog will prevent access to anything under /blog (e.g. /blog, /blog/my-post) but ^/blog$ just to the page under /blog itself.")</span>
+            <span class="hint">@T("Enter a pattern as a regular expression. On urls (path and query part of the full url, including leading trailing slash and trailing slash, if any) matching this expressions the permissions set up here will be enforced. Examples: ^/blog will prevent access to anything under /blog (e.g. /blog, /blog/my-post) but ^/blog$ just to the page under /blog itself. The pattern is case-insensitive.")</span>
         </li>
         <li>
             @Html.LabelFor(m => m.Priority, T("Priority"))

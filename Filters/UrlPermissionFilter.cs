@@ -60,7 +60,7 @@ namespace Lombiq.RoutePermissions.Filters
             var url = _hca.Current().Request.Url.PathAndQuery;
             foreach (var pattern in urlPatterns)
             {
-                if (Regex.IsMatch(url, pattern.UrlPattern))
+                if (Regex.IsMatch(url, pattern.UrlPattern, RegexOptions.IgnoreCase))
                 {
                     var item = _contentManager.Get(pattern.ContentItemId, VersionOptions.Published, new QueryHints().ExpandParts<ContentPermissionsPart>());
                     if (item == null) continue;
