@@ -25,7 +25,10 @@ namespace Lombiq.RoutePermissions
                 cfg => cfg
                     .Creatable()
                     .WithPart("TitlePart")
-                    .WithPart("CommonPart")
+                    .WithPart("CommonPart",
+                        part => part
+                            .WithSetting("OwnerEditorSettings.ShowOwnerEditor", "True")
+                            .WithSetting("DateEditorSettings.ShowDateEditor", "False"))
                     .WithPart("IdentityPart") // For import/export
                     .WithPart("ContentPermissionsPart")
                     .WithPart(typeof(UrlPermissionPart).Name)
