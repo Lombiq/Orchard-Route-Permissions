@@ -11,6 +11,9 @@ using Orchard.Mvc.Filters;
 using Orchard.Security;
 using System.Text.RegularExpressions;
 using Orchard.ContentPermissions.Models;
+using Orchard.Exceptions;
+using Orchard.Logging;
+using Orchard.Localization;
 
 namespace Lombiq.RoutePermissions.Filters
 {
@@ -21,6 +24,9 @@ namespace Lombiq.RoutePermissions.Filters
         private readonly ISignals _signals;
         private readonly IHttpContextAccessor _hca;
         private readonly IAuthorizer _authorizer;
+
+        public ILogger Logger { get; set; }
+        public Localizer T { get; set; }
 
 
         public UrlPermissionFilter(
@@ -35,6 +41,9 @@ namespace Lombiq.RoutePermissions.Filters
             _signals = signals;
             _hca = hca;
             _authorizer = authorizer;
+
+            Logger = NullLogger.Instance;
+            T = NullLocalizer.Instance;
         }
 
 
@@ -57,19 +66,28 @@ namespace Lombiq.RoutePermissions.Filters
                         .OrderByDescending(pattern => pattern.Priority);
                 });
 
-            var url = _hca.Current().Request.Url.PathAndQuery;
-            foreach (var pattern in urlPatterns)
+            try
             {
-                if (Regex.IsMatch(url, pattern.UrlPattern, RegexOptions.IgnoreCase))
+                var url = _hca.Current().Request.Url.PathAndQuery;
+                foreach (var pattern in urlPatterns)
                 {
-                    var item = _contentManager.Get(pattern.ContentItemId, VersionOptions.Published, new QueryHints().ExpandParts<ContentPermissionsPart>());
-                    if (item == null) continue;
-                    if (!_authorizer.Authorize(Orchard.Core.Contents.Permissions.ViewContent, item))
+                    if (Regex.IsMatch(url, pattern.UrlPattern, RegexOptions.IgnoreCase))
                     {
-                        filterContext.Result = new HttpUnauthorizedResult();
+                        var item = _contentManager.Get(pattern.ContentItemId, VersionOptions.Published, new QueryHints().ExpandParts<ContentPermissionsPart>());
+                        if (item == null) continue;
+                        if (!_authorizer.Authorize(Orchard.Core.Contents.Permissions.ViewContent, item))
+                        {
+                            filterContext.Result = new HttpUnauthorizedResult();
+                        }
+                        return; // A pattern matched, no need to check anything else.
                     }
-                    return; // A pattern matched, no need to check anything else.
                 }
+            }
+            catch (Exception ex) // An uncaught exception here would cause a YSOD
+            {
+                if (ex.IsFatal()) throw;
+
+                Logger.Error(ex, T("An error happened when trying to apply an url permission.").Text);
             }
         }
 
