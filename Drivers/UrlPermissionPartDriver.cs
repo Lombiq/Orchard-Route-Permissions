@@ -55,6 +55,7 @@ namespace Lombiq.RoutePermissions.Drivers
             var element = context.Element(part.PartDefinition.Name);
 
             element.SetAttributeValue("UrlPattern", part.UrlPattern);
+            element.SetAttributeValue("Priority", part.Priority);
         }
 
         protected override void Importing(UrlPermissionPart part, ImportContentContext context)
@@ -62,6 +63,7 @@ namespace Lombiq.RoutePermissions.Drivers
             var partName = part.PartDefinition.Name;
 
             context.ImportAttribute(partName, "UrlPattern", value => part.UrlPattern = value);
+            context.ImportAttribute(partName, "Priority", value => part.Priority = int.Parse(value));
         }
     }
 }
