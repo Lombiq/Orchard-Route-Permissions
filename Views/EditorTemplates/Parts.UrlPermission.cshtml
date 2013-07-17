@@ -2,7 +2,7 @@
 
 <fieldset>
     <legend>@T("Url permissions")</legend>
-    <span class="hint">@T("Warning: url permissions are not enforced for static file urls as those are served directly by IIS. Only requests going through Orchard are inspected.")</span>
+    <span class="hint">@T("Warning: url permissions are not enforced for static file urls as those are served directly by IIS. Only requests going through Orchard are inspected. Also only use this if you want to secure an area of the site that is best distinguished by an url pattern. For securing individual content items there are content type and item permissions.")</span>
     <ol>
         <li>
             @Html.LabelFor(m => m.UrlPattern, T("Url pattern"))
