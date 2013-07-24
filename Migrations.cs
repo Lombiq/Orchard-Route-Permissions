@@ -35,7 +35,18 @@ namespace Lombiq.RoutePermissions
                 );
 
 
-            return 1;
+            return 2;
+        }
+
+        public int UpdateFrom1()
+        {
+            ContentDefinitionManager.AlterTypeDefinition(ContentTypes.UrlPermission,
+                cfg => cfg
+                    .Creatable(false)
+                );
+
+
+            return 2;
         }
     }
 }

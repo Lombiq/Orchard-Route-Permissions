@@ -1,0 +1,17 @@
+﻿@model Lombiq.RoutePermissions.ViewModels.AdminIndexViewModel
+@{
+    Style.Include("lombiq-route-permissions-admin.css");
+    
+    Layout.Title = T("Route permissions");
+    Model.CreateRouteValues.Add("ReturnUrl", Request.Url.ToString());
+}
+
+<div class="manage">
+    @Html.RouteLink(T("Create").Text, Model.CreateRouteValues, new Dictionary<string, object> { { "class", "button" } })
+</div>
+
+<div class="contentItems bulk-items">
+    @Display(Model.ListShape)
+</div>
+
+@Html.AntiForgeryToken()
