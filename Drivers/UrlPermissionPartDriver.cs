@@ -49,21 +49,5 @@ namespace Lombiq.RoutePermissions.Drivers
             }
             return Editor(part, shapeHelper);
         }
-
-        protected override void Exporting(UrlPermissionPart part, ExportContentContext context)
-        {
-            var element = context.Element(part.PartDefinition.Name);
-
-            element.SetAttributeValue("UrlPattern", part.UrlPattern);
-            element.SetAttributeValue("Priority", part.Priority);
-        }
-
-        protected override void Importing(UrlPermissionPart part, ImportContentContext context)
-        {
-            var partName = part.PartDefinition.Name;
-
-            context.ImportAttribute(partName, "UrlPattern", value => part.UrlPattern = value);
-            context.ImportAttribute(partName, "Priority", value => part.Priority = int.Parse(value));
-        }
     }
 }

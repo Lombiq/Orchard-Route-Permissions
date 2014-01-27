@@ -14,13 +14,6 @@ namespace Lombiq.RoutePermissions
     {
         public int Create()
         {
-            SchemaBuilder.CreateTable(typeof(UrlPermissionPartRecord).Name,
-                table => table
-                    .ContentPartRecord()
-                    .Column<string>("UrlPattern", column => column.WithLength(2000))
-                    .Column<int>("Priority")
-				);
-
             ContentDefinitionManager.AlterTypeDefinition(ContentTypes.UrlPermission,
                 cfg => cfg
                     .Creatable()
@@ -35,7 +28,7 @@ namespace Lombiq.RoutePermissions
                 );
 
 
-            return 2;
+            return 3;
         }
 
         public int UpdateFrom1()
@@ -47,6 +40,13 @@ namespace Lombiq.RoutePermissions
 
 
             return 2;
+        }
+
+        public int UpdateFrom2()
+        {
+            SchemaBuilder.DropTable("UrlPermissionPartRecord");
+
+            return 3;
         }
     }
 }

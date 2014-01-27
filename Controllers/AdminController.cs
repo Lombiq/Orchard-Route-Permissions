@@ -39,8 +39,6 @@ namespace Lombiq.RoutePermissions.Controllers
 
             var items = _contentManager
                 .Query(VersionOptions.Latest, ContentTypes.UrlPermission)
-                .Join<UrlPermissionPartRecord>()
-                .WithQueryHintsFor(ContentTypes.UrlPermission)
                 .List()
                 .OrderBy(item => item.As<ITitleAspect>().Title);
 

@@ -14,11 +14,8 @@ namespace Lombiq.RoutePermissions.Handlers
         private readonly ISignals _signals;
 
 
-        public UrlPermissionPartHandler(
-            IRepository<UrlPermissionPartRecord> repository,
-            ISignals signals)
+        public UrlPermissionPartHandler(ISignals signals)
         {
-            Filters.Add(StorageFilter.For(repository));
             _signals = signals;
 
             OnUpdated<UrlPermissionPart>(EmptyCache);

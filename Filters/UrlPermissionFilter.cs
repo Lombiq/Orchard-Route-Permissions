@@ -55,7 +55,6 @@ namespace Lombiq.RoutePermissions.Filters
 
                     return _contentManager
                         .Query(ContentTypes.UrlPermission)
-                        .Join<UrlPermissionPartRecord>()
                         .List<UrlPermissionPart>()
                         .Select(urlPermission => new UrlPatternDefinition
                         {
