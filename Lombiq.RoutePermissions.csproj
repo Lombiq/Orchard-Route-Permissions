@@ -119,6 +119,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Licence.md" />
+    <Content Include="Styles\lombiq-route-permissions-admin.css.map">
+      <DependentUpon>lombiq-route-permissions-admin.css</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
