@@ -13,11 +13,6 @@ namespace Lombiq.RoutePermissions.Drivers
 {
     public class UrlPermissionPartDriver : ContentPartDriver<UrlPermissionPart>
     {
-        protected override string Prefix
-        {
-            get { return "Lombiq.RoutePermissions.UrlPermissionPart"; }
-        }
-
         public Localizer T { get; set; }
 
 
@@ -48,6 +43,22 @@ namespace Lombiq.RoutePermissions.Drivers
                 updater.AddModelError("UrlPatternRegexMalformed", T("There was a problem with the regex you provided: {0}", ex.Message));
             }
             return Editor(part, shapeHelper);
+        }
+
+        protected override void Exporting(UrlPermissionPart part, ExportContentContext context)
+        {
+            var element = context.Element(part.PartDefinition.Name);
+
+            element.SetAttributeValue("UrlPattern", part.UrlPattern);
+            element.SetAttributeValue("Priority", part.Priority);
+        }
+
+        protected override void Importing(UrlPermissionPart part, ImportContentContext context)
+        {
+            var partName = part.PartDefinition.Name;
+
+            context.ImportAttribute(partName, "UrlPattern", value => part.UrlPattern = value);
+            context.ImportAttribute(partName, "Priority", value => part.Priority = int.Parse(value));
         }
     }
 }
