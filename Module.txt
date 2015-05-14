@@ -3,7 +3,7 @@ AntiForgery: enabled
 Author: Lombiq
 Website: http://orchardroutepermissions.codeplex.com/
 Version: 1.0
-OrchardVersion: 1.8.2
+OrchardVersion: 1.9.0
 Description: Enables permissions for routes.
 Features:
     Lombiq.RoutePermissions:
