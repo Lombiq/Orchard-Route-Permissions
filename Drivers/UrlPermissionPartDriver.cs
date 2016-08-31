@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using Lombiq.RoutePermissions.Models;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
@@ -47,18 +44,12 @@ namespace Lombiq.RoutePermissions.Drivers
 
         protected override void Exporting(UrlPermissionPart part, ExportContentContext context)
         {
-            var element = context.Element(part.PartDefinition.Name);
-
-            element.SetAttributeValue("UrlPattern", part.UrlPattern);
-            element.SetAttributeValue("Priority", part.Priority);
+            ExportInfoset(part, context);
         }
 
         protected override void Importing(UrlPermissionPart part, ImportContentContext context)
         {
-            var partName = part.PartDefinition.Name;
-
-            context.ImportAttribute(partName, "UrlPattern", value => part.UrlPattern = value);
-            context.ImportAttribute(partName, "Priority", value => part.Priority = int.Parse(value));
+            ImportInfoset(part, context);
         }
     }
 }
