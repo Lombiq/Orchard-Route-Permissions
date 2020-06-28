@@ -1,8 +1,8 @@
-# Orchard Route Permissions Module Readme
+# Orchard Route Permissions Module
 
 
 
-## Project Description
+## About
 
 An Orchard module for enabling permissions for routes.
 
@@ -31,12 +31,9 @@ After installation the module will add a new tab under the Users menu item on th
 
 You can watch a demo of the first version of this module (the current one is bit updated) as part of an [Orchard community meeting](http://youtu.be/z5iGKIguWG0?t=24m40s).
 
-The module's source is available in two public source repositories, automatically mirrored in both directions with [Git-hg Mirror](https://githgmirror.com):
 
-- [https://bitbucket.org/Lombiq/orchard-route-permissions](https://bitbucket.org/Lombiq/orchard-route-permissions) (Mercurial repository)
-- [https://github.com/Lombiq/Orchard-Route-Permissions](https://github.com/Lombiq/Orchard-Route-Permissions) (Git repository)
+## Contributing and support
 
-Bug reports, feature requests and comments are warmly welcome, **please do so via GitHub**.
-Feel free to send pull requests too, no matter which source repository you choose for this purpose.
+Bug reports, feature requests, comments, questions, code contributions, and love letters are warmly welcome, please do so via GitHub issues and pull requests. Please adhere to our [open-source guidelines](https://lombiq.com/open-source-guidelines) while doing so.
 
-This project is developed by [Lombiq Technologies Ltd](http://lombiq.com/). Commercial-grade support is available through Lombiq.
+This project is developed by [Lombiq Technologies](https://lombiq.com/). Commercial-grade support is available through Lombiq.
