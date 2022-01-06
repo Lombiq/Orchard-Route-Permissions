@@ -144,10 +144,10 @@
     <Content Include="Styles\lombiq-route-permissions-admin.less" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="compilerconfig.json" />
-    <None Include="compilerconfig.json.defaults">
+    <Content Include="compilerconfig.json" />
+    <Content Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
-    </None>
+    </Content>
     <None Include="Licence.md" />
   </ItemGroup>
   <PropertyGroup>
@@ -194,6 +194,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
